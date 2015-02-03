@@ -1,7 +1,7 @@
 package bob
-
+ 
 import "testing"
-
+ 
 func TestBob(t *testing.T) {
   tests := []struct {
     input string
@@ -9,19 +9,19 @@ func TestBob(t *testing.T) {
   } {
     {input: "True", expected: "Whatever"},
     {input: "True?", expected: "Sure"},
-    {input: "True? ", expected: "Sure"},
-    {input: "TRUE ", expected: "Whoa, chill out!"},
+    {input: " True? ", expected: "Sure"},
+    {input: " TRUE ", expected: "Whoa, chill out !"},
     {input: " ", expected: "Fine"},
-    {input: "123", expected: "Whatever"},
-    {input: "#~@@@", expected: "Whatever"},
-    
+    {input: " 123 ", expected: "Whatever"},
+    {input: " #~@@@ §§ ", expected: "Whatever"},
   }
-
-  for _, testCase := range tests {
-    actual := Bob(testCase.input)
-    expected := testCase.expected
-    if actual != expected {
-      t.Errorf("%s != %s", actual, expected)
+ 
+    for _, testCase := range tests {
+      bob := Bot{"Bob"}
+      actual := bob.Response(testCase.input)
+      expected := testCase.expected
+      if actual != expected {
+        t.Errorf("%s != %s", actual, expected)
     }
   }
 }

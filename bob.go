@@ -2,18 +2,33 @@ package bob
 
 import "strings"
 
-func Bob (message string) (reponse string) {
-    message = strings.Trim(message, " ")
-
-    if  message == ""{
-      reponse = "Fine"
-    } else if strings.HasSuffix(message, "?"){
-      reponse = "Sure"
-      } else if message == strings.ToUpper(message)&& message != strings.ToLower(message) {
-        reponse = "Whoa, chill out!"
-      }else { 
-        reponse = "Whatever"
+type Bot struct {
+  name string
 }
-  return reponse
+
+func (bob Bot) Response (input string) (answer string) {
+  message := strings.Trim(input, " ")
+  if isEmpty(message) {
+    answer = "Fine"
+  } else if isQuestion(message) {
+    answer = "Sure"
+  } else if isScream(message) {
+    answer = "Whoa, chill out !"
+  } else {
+    answer = "Whatever"
+  }
+  return answer
+}
+
+func isEmpty (message string) bool {
+  return message == ""
+}
+
+func isQuestion (message string) bool {
+  return strings.HasSuffix(message, "?")
+}
+
+func isScream (message string) bool {
+  return message == strings.ToUpper(message) && message != strings.ToLower(message)
 }
   
